@@ -20,4 +20,3 @@ jobs:
         uses: stefanprodan/helm-gh-pages@master
         with:
           token: ${{ secrets.CR_TOKEN }}
-          branch: main 

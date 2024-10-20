@@ -19,8 +19,5 @@ Common labels
 {{- define "radarr.labels" -}}
 helm.sh/chart: {{ include "radarr.chart" . }}
 {{ include "radarr.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
