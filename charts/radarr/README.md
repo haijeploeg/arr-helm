@@ -12,6 +12,18 @@ helm repo update
 helm install radarr arr-helm/radarr
 ```
 
+## Install
+
+```bash
+helm install radarr arr-helm/radarr -f values.yaml
+```
+
+## Uninstall
+
+```bash
+helm uninstall radarr
+```
+
 ## Values
 
 See `values.yaml` for a full list of all the options. Below are the most important values listed.
