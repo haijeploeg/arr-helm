@@ -1,0 +1,60 @@
+---
+
+image:
+  tag: latest
+  pullPolicy: Always
+  repository: linuxserver/radarr
+
+service:
+  port: 7878
+  type: ClusterIP
+
+env:
+  puid: "1000"
+  pgid: "1000"
+  tz: Europe/Amsterdam
+
+ingress:
+  annotations: {}
+  ingressClassName: nginx
+  host: ""
+  tls: []
+  # - hosts:
+  #   - radarr.example.com
+  #   secretName: radarr-tls-secret
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  allowPrivilegeEscalation: false
+
+storage:
+  config:
+    storage: 5Gi
+  movies:
+    storage: 100Gi
+    storageClassName: ""
+    nfs:
+      path: ""
+      server: ""
+  downloads:
+    storage: 100Gi
+    storageClassName: ""
+    nfs:
+      path: ""
+      server: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
