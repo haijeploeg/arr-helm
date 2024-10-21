@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   radarr:
   - apiVersion: v2
-    created: "2024-10-21T08:37:26.190350022Z"
+    created: "2024-10-21T08:59:10.225798382Z"
     description: Movie organizer/manager for usenet and torrent users
-    digest: ae39a7e395f4e16aa4bb4463eacc2bd2dc1ff5c6e524e45edb20761493ce6f7c
+    digest: f5513bdf0f26f66b8d7438e39278f57ce891cba77df138ebcd769fe8e6436322
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
     icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
     keywords:
@@ -106,4 +106,4 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/radarr-0.0.1.tgz
     version: 0.0.1
-generated: "2024-10-21T08:37:26.189843024Z"
+generated: "2024-10-21T08:59:10.224370885Z"
