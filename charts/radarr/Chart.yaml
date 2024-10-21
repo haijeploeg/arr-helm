@@ -3,7 +3,7 @@
 apiVersion: v2
 description: Movie organizer/manager for usenet and torrent users
 name: radarr
-version: 0.1.3
+version: 0.1.4
 keywords:
   - radarr
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr

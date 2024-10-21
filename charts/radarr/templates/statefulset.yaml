@@ -22,17 +22,13 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
+      securityContext:
+      {{- toYaml .Values.securityContext | nindent 12 }}
       containers:
         - name: radarr
-          securityContext:
-          {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: PUID
-              value: {{ .Values.env.puid | quote }}
-            - name: PGID
-              value: {{ .Values.env.pgid | quote }}
             - name: TZ
               value: {{ .Values.env.tz | quote }}
           ports:

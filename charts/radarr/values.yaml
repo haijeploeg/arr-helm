@@ -3,15 +3,13 @@
 image:
   tag: rolling
   pullPolicy: Always
-  repository: ghcr.io/onedr0p/radarr
+  repository: ghcr.io/onedr0p/radarr-develop
 
 service:
   port: 7878
   type: ClusterIP
 
 env:
-  puid: "65534"
-  pgid: "65534"
   tz: Europe/Amsterdam
 
 ingress:
@@ -30,14 +28,17 @@ resources:
 
 securityContext:
   allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
   capabilities:
-    drop:
-    - ALL
-  fsGroup: 65534
-  fsGroupChangePolicy: OnRootMismatch
-  runAsGroup: 65534
+    drop: ["ALL"]
   runAsNonRoot: true
-  runAsUser: 65534
+  runAsUser: 1057
+  runAsGroup: 1057
+  fsGroup: 1057
+  fsGroupChangePolicy: OnRootMismatch
+  supplementalGroups: [10000]
+  seccompProfile:
+    type: RuntimeDefault
 
 storage:
   config:
