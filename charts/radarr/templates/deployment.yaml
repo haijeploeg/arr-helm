@@ -30,11 +30,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PUID
-              value: {{ .Values.env.puid }}
+              value: {{ .Values.env.puid | quote }}
             - name: PGID
-              value: {{ .Values.env.pgid }}
+              value: {{ .Values.env.pgid | quote }}
             - name: TZ
-              value: {{ .Values.env.tz }}
+              value: {{ .Values.env.tz | quote }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
