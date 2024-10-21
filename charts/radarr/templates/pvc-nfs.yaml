@@ -13,7 +13,7 @@ spec:
   capacity:
     storage: {{ .Values.storage.movies.storage }}
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   nfs:
     path: {{ .Values.storage.movies.nfs.path }}
     server: {{ .Values.storage.movies.nfs.server }}
@@ -36,7 +36,7 @@ metadata:
     {{- end }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.storage.movies.storage }}
@@ -58,7 +58,7 @@ spec:
   capacity:
     storage: {{ .Values.storage.downloads.storage }}
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   nfs:
     path: {{ .Values.storage.downloads.nfs.path }}
     server: {{ .Values.storage.downloads.nfs.server }}
@@ -81,7 +81,7 @@ metadata:
     {{- end }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: {{ .Values.storage.downloads.storage }}
