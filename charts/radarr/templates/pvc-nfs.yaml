@@ -21,7 +21,7 @@ spec:
   mountOptions:
     - hard
     - nfsvers=3
-  storageClassName: {{ .Values.storage.movies.storageClassName }}
+  storageClassName: "{{ .Values.storage.movies.storageClassName }}"
 
 ---
 
@@ -41,7 +41,7 @@ spec:
     requests:
       storage: {{ .Values.storage.movies.storage }}
   volumeName: {{ .Chart.Name }}-movies
-  storageClassName: {{ .Values.storage.movies.storageClassName }}
+  storageClassName: "{{ .Values.storage.movies.storageClassName }}"
 
 ---
 
@@ -66,7 +66,7 @@ spec:
   mountOptions:
     - hard
     - nfsvers=3
-  storageClassName: {{ .Values.storage.downloads.storageClassName }}
+  storageClassName: "{{ .Values.storage.downloads.storageClassName }}"
 
 ---
 
@@ -86,4 +86,4 @@ spec:
     requests:
       storage: {{ .Values.storage.downloads.storage }}
   volumeName: {{ .Chart.Name }}-downloads
-  storageClassName: {{ .Values.storage.downloads.storageClassName }}
+  storageClassName: "{{ .Values.storage.downloads.storageClassName }}"
