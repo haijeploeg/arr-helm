@@ -23,7 +23,7 @@ spec:
         {{- end }}
     spec:
       securityContext:
-      {{- toYaml .Values.securityContext | nindent 12 }}
+      {{- toYaml .Values.securityContext.statefulSet | nindent 8 }}
       containers:
         - name: radarr
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -36,23 +36,21 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - curl "http://localhost:7878/radarr/api/health?ApiKey=$(sed -ne '/ApiKey/{s/.*<ApiKey>\(.*\)<\/ApiKey>.*/\1/p;q;}' </config/config.xml)"
+            httpGet:
+              path: /ping
+              port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - curl "http://localhost:7878/radarr/api/system/status?ApiKey=$(sed -ne '/ApiKey/{s/.*<ApiKey>\(.*\)<\/ApiKey>.*/\1/p;q;}' </config/config.xml)"
+            httpGet:
+              path: /ping
+              port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:
-          {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.securityContext.pod | nindent 12 }}
           volumeMounts:
             - name: config
               mountPath: /config
