@@ -2,12 +2,12 @@
 
 apiVersion: v2
 description: Movie organizer/manager for usenet and torrent users
-name: radarr
+name: sonarr
 version: 1.0.0
 keywords:
-  - radarr
-home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
-icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
+  - sonarr
+home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sonarr
+icon: https://github.com/sonarr/sonarr/blob/develop/Logo/512.png
 maintainers:
   - name: Haije Ploeg
     email: ploeg.haije@gmail.com

@@ -3,7 +3,7 @@
 image:
   tag: rolling
   pullPolicy: Always
-  repository: ghcr.io/onedr0p/radarr-develop
+  repository: ghcr.io/onedr0p/sonarr-develop
 
 service:
   port: 7878
@@ -18,24 +18,24 @@ ingress:
   host: ""
   tls: []
   # - hosts:
-  #   - radarr.example.com
-  #   secretName: radarr-tls-secret
+  #   - sonarr.example.com
+  #   secretName: sonarr-tls-secret
 
 postgres:
   enabled: false
   #
   # Use classic values
   #
-  # host: radarr-postgres
+  # host: sonarr-postgres
   # port: 5432
-  # user: radarr
-  # database: radarr
+  # user: sonarr
+  # database: sonarr
   # password: P@ssw0rd123
   
   #
   # Use existing secret
   #
-  # existingSecret: radarr-postgres-secret
+  # existingSecret: sonarr-postgres-secret
   # existingSecretHostKey: host
   # existingSecretPortKey: port
   # existingSecretUserKey: username
@@ -66,7 +66,7 @@ securityContext:
 storage:
   config:
     storage: 5Gi
-  movies:
+  tv:
     storage: 100Gi
     storageClassName: ""
     nfs:

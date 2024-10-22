@@ -5,7 +5,7 @@ kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}
   labels:
-    {{- include "radarr.labels" . | nindent 4 }}
+    {{- include "sonarr.labels" . | nindent 4 }}
     {{- with .Values.additionalLabels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -13,11 +13,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "radarr.selectorLabels" . | nindent 6 }}
+      {{- include "sonarr.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "radarr.labels" . | nindent 8 }}
+        {{- include "sonarr.labels" . | nindent 8 }}
         {{- with .Values.additionalLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -25,14 +25,14 @@ spec:
       securityContext:
       {{- toYaml .Values.securityContext.statefulSet | nindent 8 }}
       containers:
-        - name: radarr
+        - name: sonarr
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: TZ
               value: {{ .Values.env.tz | quote }}
             {{- if .Values.postgres.enabled }}
-            - name: RADARR__POSTGRES__HOST
+            - name: SONARR__POSTGRES__HOST
               {{- if .Values.postgres.existingSecretHostKey }}
               valueFrom:
                 secretKeyRef:
@@ -41,7 +41,7 @@ spec:
               {{- else }}
               value: {{ .Values.postgres.host }}
               {{- end }}
-            - name: RADARR__POSTGRES__PORT
+            - name: SONARR__POSTGRES__PORT
               {{- if .Values.postgres.existingSecretPortKey }}
               valueFrom:
                 secretKeyRef:
@@ -50,7 +50,7 @@ spec:
               {{- else }}
               value: {{ .Values.postgres.port | quote }}
               {{- end }}
-            - name: RADARR__POSTGRES__USER
+            - name: SONARR__POSTGRES__USER
               {{- if .Values.postgres.existingSecretUserKey }}
               valueFrom:
                 secretKeyRef:
@@ -59,7 +59,7 @@ spec:
               {{- else }}
               value: {{ .Values.postgres.user }}
               {{- end }}
-            - name: RADARR__POSTGRES__PASSWORD
+            - name: SONARR__POSTGRES__PASSWORD
               {{- if .Values.postgres.existingSecretPasswordKey }}
               valueFrom:
                 secretKeyRef:
@@ -68,7 +68,7 @@ spec:
               {{- else }}
               value: {{ .Values.postgres.password }}
               {{- end }}
-            - name: RADARR__POSTGRES__MAINDB
+            - name: SONARR__POSTGRES__MAINDB
               {{- if .Values.postgres.existingSecretDatabaseKey }}
               valueFrom:
                 secretKeyRef:
@@ -101,17 +101,17 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: movies
-              mountPath: /movies
+            - name: tv
+              mountPath: /tv
             - name: downloads
               mountPath: /downloads
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: {{ .Chart.Name }}-config
-        - name: movies
+        - name: tv
           persistentVolumeClaim:
-            claimName: {{ .Chart.Name }}-movies
+            claimName: {{ .Chart.Name }}-tv
         - name: downloads
           persistentVolumeClaim:
             claimName: {{ .Chart.Name }}-downloads
