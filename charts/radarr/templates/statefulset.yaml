@@ -77,6 +77,8 @@ spec:
               {{- else }}
               value: {{ .Values.postgres.database }}
               {{- end }}
+            - name: RADARR__LOG__DBENABLED
+              value: "False"
             {{- end }}
           ports:
             - name: http
