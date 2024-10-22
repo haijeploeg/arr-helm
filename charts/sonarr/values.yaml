@@ -6,7 +6,7 @@ image:
   repository: ghcr.io/onedr0p/sonarr-develop
 
 service:
-  port: 7878
+  port: 8989
   type: ClusterIP
 
 env:
