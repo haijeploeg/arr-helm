@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   radarr:
   - apiVersion: v2
-    created: "2024-10-22T15:22:36.274713981Z"
+    created: "2024-10-22T16:53:11.127090439Z"
     description: Movie organizer/manager for usenet and torrent users
-    digest: 6cd3178a79969351a8936020655a3a903a0c5652f6acf166aec4ded1b47d9e52
+    digest: 2a4e1294b5eb0e11908b9ad35c999bfdd9aee431457a06eedec1a0f7e95c752f
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
     icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
     keywords:
@@ -183,6 +183,21 @@ entries:
     version: 0.0.1
   sonarr:
   - apiVersion: v2
+    created: "2024-10-22T16:53:11.127526856Z"
+    description: Movie organizer/manager for usenet and torrent users
+    digest: 59f23ca9ba7dffb859191659d0bf703791011a1fc605f3781b7150e01bb32c79
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sonarr
+    icon: https://github.com/sonarr/sonarr/blob/develop/Logo/512.png
+    keywords:
+    - sonarr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: sonarr
+    urls:
+    - https://haijeploeg.github.io/arr-helm/sonarr-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
     created: "2024-10-22T15:22:36.275146741Z"
     description: Movie organizer/manager for usenet and torrent users
     digest: 8d73dd6b0e2668f72a47175b9156f544da261cf0a7234065241ccb0443ab885a
@@ -242,4 +257,4 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/sonarr-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-22T15:22:36.27371351Z"
+generated: "2024-10-22T16:53:11.126523015Z"
