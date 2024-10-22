@@ -1,6 +1,6 @@
-# radarr
+# sonarr
 
-Movie organizer/manager for usenet and torrent users.
+Smart PVR for newsgroup and bittorrent users.
 
 > This chart is not maintained by the upstream project. Bugs in the application needs to be filled in the upstream project. Issues about the helm chart can be filled in this repository.
 
@@ -9,19 +9,19 @@ Movie organizer/manager for usenet and torrent users.
 ```bash
 helm repo add arr-helm https://haijeploeg.github.io/arr-helm/
 helm repo update
-helm install radarr arr-helm/radarr
+helm install sonarr arr-helm/sonarr
 ```
 
 ## Install
 
 ```bash
-helm install radarr arr-helm/radarr -f values.yaml
+helm install sonarr arr-helm/sonarr -f values.yaml
 ```
 
 ## Uninstall
 
 ```bash
-helm uninstall radarr
+helm uninstall sonarr
 ```
 
 ## Values
@@ -31,7 +31,7 @@ See `values.yaml` for a full list of all the options. Below are the most importa
 | Key | Type | Default | Description |
 | --- | --- | --- | --- |
 | `image.tag` | `string` | `latest` | The tag of the image to use |
-| `image.repository` | `string` | `linuxserver/radarr` | The image to use |
+| `image.repository` | `string` | `linuxserver/sonarr` | The image to use |
 | `image.pullPolicy` | `string` | `Always` | The `imagePullPolicy` setting |
 | `env.tz` | `string` | `Europe/Amsterdam` | The timezone |
 | `ingress.annotations` | `dict` | `{}` | Annotations for the ingress |
@@ -51,10 +51,10 @@ See `values.yaml` for a full list of all the options. Below are the most importa
 | `postgres.existingSecretPasswordKey` | `string` | `N/A` | The key withing the `existingSecret` that holds the postgres password |
 | `postgres.existingSecretDatabaseKey` | `string` | `N/A` | The key withing the `existingSecret` that holds the postgres host |
 | `storage.config.storage` | `string` | `5Gi` | The amount of storage mounted on the configuration folder |
-| `storage.movies.storage` | `string` | `100Gi` | The amount of storage behind the NFS folder |
-| `storage.movies.storageClassName` | `string` | `""` | The storageClass to use. Leave empty unless you know what you are doing! |
-| `storage.movies.nfs.path` | `string` | `""` | The path on the NFS server that holds the movies |
-| `storage.movies.nfs.path` | `string` | `""` | The fqdn to the server hosting the NFS share |
+| `storage.tv.storage` | `string` | `100Gi` | The amount of storage behind the NFS folder |
+| `storage.tv.storageClassName` | `string` | `""` | The storageClass to use. Leave empty unless you know what you are doing! |
+| `storage.tv.nfs.path` | `string` | `""` | The path on the NFS server that holds the tv shows |
+| `storage.tv.nfs.path` | `string` | `""` | The fqdn to the server hosting the NFS share |
 | `storage.downloads.storage` | `string` | `100Gi` | The amount of storage behind the NFS folder |
 | `storage.downloads.storageClassName` | `string` | `""` | The storageClass to use. Leave empty unless you know what you are doing! |
 | `storage.downloads.nfs.path` | `string` | `""` | The path on the NFS server that holds the downloads |
@@ -67,7 +67,7 @@ As you can see in the values, PostgreSQL can be used as a database backend. Plea
 ```yaml
 postgres:
   enabled: true
-  existingSecret: radarr-postgres-secret
+  existingSecret: sonarr-postgres-secret
   existingSecretHostKey: host
   existingSecretPortKey: port
   existingSecretUserKey: username
@@ -81,4 +81,4 @@ postgres:
 
 #### Added
 
-- Initial release of radarr
+- Initial release of sonarr
