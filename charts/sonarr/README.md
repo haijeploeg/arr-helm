@@ -51,12 +51,8 @@ See `values.yaml` for a full list of all the options. Below are the most importa
 | `postgres.existingSecretPasswordKey` | `string` | `N/A` | The key withing the `existingSecret` that holds the postgres password |
 | `postgres.existingSecretDatabaseKey` | `string` | `N/A` | The key withing the `existingSecret` that holds the postgres host |
 | `storage.config.storage` | `string` | `5Gi` | The amount of storage mounted on the configuration folder |
-| `storage.tv.storage` | `string` | `100Gi` | The amount of storage behind the NFS folder |
-| `storage.tv.storageClassName` | `string` | `""` | The storageClass to use. Leave empty unless you know what you are doing! |
 | `storage.tv.nfs.path` | `string` | `""` | The path on the NFS server that holds the tv shows |
 | `storage.tv.nfs.path` | `string` | `""` | The fqdn to the server hosting the NFS share |
-| `storage.downloads.storage` | `string` | `100Gi` | The amount of storage behind the NFS folder |
-| `storage.downloads.storageClassName` | `string` | `""` | The storageClass to use. Leave empty unless you know what you are doing! |
 | `storage.downloads.nfs.path` | `string` | `""` | The path on the NFS server that holds the downloads |
 | `storage.downloads.nfs.path` | `string` | `""` | The fqdn to the server hosting the NFS share |
 
