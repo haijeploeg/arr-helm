@@ -37,7 +37,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postges.existingSecretHostKey }}
+                  key: {{ .Values.postgres.existingSecretHostKey }}
               {{- else }}
               value: {{ .Values.postgres.host }}
               {{- end }}
@@ -46,7 +46,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postges.existingSecretPortKey }}
+                  key: {{ .Values.postgres.existingSecretPortKey }}
               {{- else }}
               value: {{ .Values.postgres.port | quote }}
               {{- end }}
@@ -55,7 +55,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postges.existingSecretUserKey }}
+                  key: {{ .Values.postgres.existingSecretUserKey }}
               {{- else }}
               value: {{ .Values.postgres.user }}
               {{- end }}
@@ -64,7 +64,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postges.existingSecretPasswordKey }}
+                  key: {{ .Values.postgres.existingSecretPasswordKey }}
               {{- else }}
               value: {{ .Values.postgres.password }}
               {{- end }}
@@ -73,7 +73,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postges.existingSecretDatabaseKey }}
+                  key: {{ .Values.postgres.existingSecretDatabaseKey }}
               {{- else }}
               value: {{ .Values.postgres.database }}
               {{- end }}
