@@ -112,11 +112,13 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Chart.Name }}-config
         - name: tv
-          persistentVolumeClaim:
-            claimName: {{ .Chart.Name }}-tv
+          nfs:
+            path: {{ .Values.storage.tv.nfs.path }}
+            server: {{ .Values.storage.tv.nfs.server }}
         - name: downloads
-          persistentVolumeClaim:
-            claimName: {{ .Chart.Name }}-downloads
+          nfs:
+            path: {{ .Values.storage.downloads.nfs.path }}
+            server: {{ .Values.storage.downloads.nfs.server }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
