@@ -3,7 +3,7 @@
 apiVersion: v2
 description: Movie organizer/manager for usenet and torrent users
 name: sonarr
-version: 1.0.1
+version: 1.0.2
 keywords:
   - sonarr
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sonarr
