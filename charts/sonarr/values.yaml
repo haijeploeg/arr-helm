@@ -31,7 +31,7 @@ postgres:
   # user: sonarr
   # database: sonarr
   # password: P@ssw0rd123
-  
+
   #
   # Use existing secret
   #

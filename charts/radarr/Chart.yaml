@@ -9,5 +9,5 @@ keywords:
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
 icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
 maintainers:
-  - name: Haije Ploeg
+  - name: haijeploeg
     email: ploeg.haije@gmail.com

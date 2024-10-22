@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Persistentvolume
 metadata:
-  name: {{ .Chart.Name }}-movies
+  name: {{ .Chart.Name }}-tv
   labels:
     {{- include "sonarr.labels" . | nindent 4 }}
     {{- with .Values.additionalLabels }}
@@ -11,24 +11,24 @@ metadata:
     {{- end }}
 spec:
   capacity:
-    storage: {{ .Values.storage.movies.storage }}
+    storage: {{ .Values.storage.tv.storage }}
   accessModes:
     - ReadWriteOnce
   nfs:
-    path: {{ .Values.storage.movies.nfs.path }}
-    server: {{ .Values.storage.movies.nfs.server }}
+    path: {{ .Values.storage.tv.nfs.path }}
+    server: {{ .Values.storage.tv.nfs.server }}
   persistentvolumeReclaimPolicy: Retain
   mountOptions:
     - hard
     - nfsvers=3
-  storageClassName: {{ .Values.storage.movies.storageClassName | quote }}
+  storageClassName: {{ .Values.storage.tv.storageClassName | quote }}
 
 ---
 
 apiVersion: v1
 kind: PersistentvolumeClaim
 metadata:
-  name: {{ .Chart.Name }}-movies
+  name: {{ .Chart.Name }}-tv
   labels:
     {{- include "sonarr.labels" . | nindent 4 }}
     {{- with .Values.additionalLabels }}
@@ -39,9 +39,9 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.storage.movies.storage }}
-  volumeName: {{ .Chart.Name }}-movies
-  storageClassName: {{ .Values.storage.movies.storageClassName | quote }}
+      storage: {{ .Values.storage.tv.storage }}
+  volumeName: {{ .Chart.Name }}-tv
+  storageClassName: {{ .Values.storage.tv.storageClassName | quote }}
 
 ---
 
