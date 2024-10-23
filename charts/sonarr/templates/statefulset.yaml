@@ -30,7 +30,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: TZ
-              value: {{ .Values.env.tz | quote }}
+              value: {{ .Values.config.tz | quote }}
+            {{- if .Values.config.apikeySecret }}
+            - name: SONARR__AUTH__APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.apikeySecret }}
+                  key: apikey
+            {{- end }}
             {{- if .Values.postgres.enabled }}
             - name: SONARR__POSTGRES__HOST
               {{- if .Values.postgres.existingSecretHostKey }}

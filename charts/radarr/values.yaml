@@ -9,8 +9,9 @@ service:
   port: 7878
   type: ClusterIP
 
-env:
+config:
   tz: Europe/Amsterdam
+  # apikeySecret: radarr-apikey
 
 ingress:
   annotations: {}
