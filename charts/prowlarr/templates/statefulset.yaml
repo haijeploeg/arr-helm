@@ -1,0 +1,136 @@
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    {{- include "prowlarr.labels" . | nindent 4 }}
+    {{- with .Values.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "prowlarr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "prowlarr.labels" . | nindent 8 }}
+        {{- with .Values.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: prowlarr
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.config.tz | quote }}
+            {{- if .Values.config.apikeySecret }}
+            - name: PROWLARR__AUTH__APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.apikeySecret }}
+                  key: apikey
+            {{- end }}
+            {{- if .Values.postgres.enabled }}
+            - name: PROWLARR__POSTGRES__HOST
+              {{- if .Values.postgres.existingSecretHostKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: {{ .Values.postgres.existingSecretHostKey }}
+              {{- else }}
+              value: {{ .Values.postgres.host }}
+              {{- end }}
+            - name: PROWLARR__POSTGRES__PORT
+              {{- if .Values.postgres.existingSecretPortKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: {{ .Values.postgres.existingSecretPortKey }}
+              {{- else }}
+              value: {{ .Values.postgres.port | quote }}
+              {{- end }}
+            - name: PROWLARR__POSTGRES__USER
+              {{- if .Values.postgres.existingSecretUserKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: {{ .Values.postgres.existingSecretUserKey }}
+              {{- else }}
+              value: {{ .Values.postgres.user }}
+              {{- end }}
+            - name: PROWLARR__POSTGRES__PASSWORD
+              {{- if .Values.postgres.existingSecretPasswordKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: {{ .Values.postgres.existingSecretPasswordKey }}
+              {{- else }}
+              value: {{ .Values.postgres.password }}
+              {{- end }}
+            - name: PROWLARR__POSTGRES__MAINDB
+              {{- if .Values.postgres.existingSecretDatabaseKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: {{ .Values.postgres.existingSecretDatabaseKey }}
+              {{- else }}
+              value: {{ .Values.postgres.database }}
+              {{- end }}
+            - name: PROWLARR__LOG__DBENABLED
+              value: "False"
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          {{- if .Values.postgres.enabled }}
+          emptyDir: {}
+          {{- else }}
+          persistentVolumeClaim:
+            claimName: {{ .Chart.Name }}-config
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
