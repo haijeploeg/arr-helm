@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   bazarr:
   - apiVersion: v2
-    created: "2024-10-24T12:52:48.790294387Z"
+    created: "2024-10-24T13:53:00.759024747Z"
     description: Bazarr is a companion application to Sonarr and Radarr
-    digest: bab8eee6f492835fdba3a55735439a604520b8e36e68c3214786df9591553c99
+    digest: 0cf5c4317609e10642d435dfb24086d8ecbed334116b8c8da9118d6906212c11
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/bazarr
     icon: https://github.com/morpheus65535/bazarr/blob/master/frontend/public/images/logo128.png
     keywords:
@@ -31,7 +31,39 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/bazarr-1.0.0.tgz
     version: 1.0.0
+  overseerr:
+  - apiVersion: v2
+    created: "2024-10-24T13:53:00.759414433Z"
+    description: Request management and media discovery tool for the Plex ecosystem
+    digest: 2f1803943376e929b34a2d83f9a74f3b86de653a98b7fed02c9d9d0148cb53eb
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/overseerr
+    icon: https://github.com/sct/overseerr/blob/develop/public/os_logo_filled.png
+    keywords:
+    - overseerr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: overseerr
+    urls:
+    - https://haijeploeg.github.io/arr-helm/overseerr-1.0.0.tgz
+    version: 1.0.0
   prowlarr:
+  - apiVersion: v2
+    created: "2024-10-24T13:53:00.759783009Z"
+    description: Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs
+      base stack to integrate with your various PVR apps
+    digest: 92a540e51051cda48a2f106314e7e1fdafe51de54656651bdc1d30c61c066060
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/prowlarr
+    icon: https://github.com/prowlarr/prowlarr/blob/develop/Logo/512.png
+    keywords:
+    - prowlarr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: prowlarr
+    urls:
+    - https://haijeploeg.github.io/arr-helm/prowlarr-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     created: "2024-10-24T12:52:48.790701936Z"
     description: Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs
@@ -50,9 +82,9 @@ entries:
     version: 1.0.0
   radarr:
   - apiVersion: v2
-    created: "2024-10-24T12:52:48.79106861Z"
+    created: "2024-10-24T13:53:00.760166674Z"
     description: Movie organizer/manager for usenet and torrent users
-    digest: 1581f6557de2ae574d7db5da9f28d371fb801a01259e32304d786f1255d1cde8
+    digest: b7e9a3b439c1bb366b0e02dc48ceca0e8af854aa849f1324c3aca6320bf4263f
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
     icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
     keywords:
@@ -276,6 +308,21 @@ entries:
     version: 0.0.1
   sabnzbd:
   - apiVersion: v2
+    created: "2024-10-24T13:53:00.760523357Z"
+    description: SABnzbd - The automated Usenet download tool
+    digest: 72ab78d4c8aacb39d00a2d4f61c3dfb47a3f019fb84f7608e720ba691ea459a1
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sabnzbd
+    icon: https://github.com/sabnzbd/sabnzbd/blob/develop/icons/logo-arrow.svg
+    keywords:
+    - sabnzbd
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: sabnzbd
+    urls:
+    - https://haijeploeg.github.io/arr-helm/sabnzbd-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     created: "2024-10-24T12:52:48.791430103Z"
     description: SABnzbd - The automated Usenet download tool
     digest: 79df59f3f3d2680a02d6a74d203945f9d270a5483a29af246a6699e1d2658314
@@ -292,9 +339,9 @@ entries:
     version: 1.0.0
   sonarr:
   - apiVersion: v2
-    created: "2024-10-24T12:52:48.791803629Z"
+    created: "2024-10-24T13:53:00.760876715Z"
     description: Movie organizer/manager for usenet and torrent users
-    digest: ca1bcb80d20b792ee51725e31b7e1873a4865b6fbbb35a466eb2e6f438ea6361
+    digest: 395ea2b40a635c1b66da48cca1c9917f397cd849a4d045c36c6f6e035b70999b
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sonarr
     icon: https://github.com/sonarr/sonarr/blob/develop/Logo/512.png
     keywords:
@@ -396,4 +443,4 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/sonarr-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-24T12:52:48.789778165Z"
+generated: "2024-10-24T13:53:00.758310458Z"
