@@ -61,7 +61,7 @@ spec:
             - name: movies
               mountPath: /movies
       volumes:
-        - name: /tmp
+        - name: tmp
           emptyDir: {}
         - name: config
           persistentVolumeClaim:
