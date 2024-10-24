@@ -33,8 +33,8 @@ See `values.yaml` for a full list of all the options. Below are the most importa
 | `config.apikeySecret` | `string` | `N/A` | The existing secret containing the api key. The key should be `apikey` |
 | `config.tz` | `string` | `Europe/Amsterdam` | The timezone |
 | `image.pullPolicy` | `string` | `Always` | The `imagePullPolicy` setting |
-| `image.repository` | `string` | `linuxserver/radarr` | The image to use |
-| `image.tag` | `string` | `latest` | The tag of the image to use |
+| `image.repository` | `string` | `ghcr.io/onedr0p/radarr-develop` | The image to use |
+| `image.tag` | `string` | `rolling` | The tag of the image to use |
 | `ingress.annotations` | `dict` | `{}` | Annotations for the ingress |
 | `ingress.host` | `string` | `""` | The hostname to run the application |
 | `ingress.ingressClassName` | `string` | `nginx` | The className of the ingress |
