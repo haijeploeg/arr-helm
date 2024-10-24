@@ -55,7 +55,7 @@ spec:
             - name: tmp
               mountPath: /tmp
             - name: config
-              mountPath: /config
+              mountPath: /app/config
       volumes:
         - name: tmp
           emptyDir: {}
