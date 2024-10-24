@@ -3,7 +3,7 @@
 apiVersion: v2
 description: SABnzbd - The automated Usenet download tool
 name: sabnzbd
-version: 1.0.0
+version: 1.0.1
 keywords:
   - sabnzbd
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sabnzbd
