@@ -1,6 +1,37 @@
 apiVersion: v1
 entries:
+  bazarr:
+  - apiVersion: v2
+    created: "2024-10-24T10:10:15.329994895Z"
+    description: Bazarr is a companion application to Sonarr and Radarr
+    digest: 35577c6e70d7503c63d880300bb7db487b081d17deca7084dd51baed2f3a1c15
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/bazarr
+    icon: https://github.com/morpheus65535/bazarr/blob/master/frontend/public/images/logo128.png
+    keywords:
+    - bazarr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: bazarr
+    urls:
+    - https://haijeploeg.github.io/arr-helm/bazarr-1.0.0.tgz
+    version: 1.0.0
   radarr:
+  - apiVersion: v2
+    created: "2024-10-24T10:10:15.330816001Z"
+    description: Movie organizer/manager for usenet and torrent users
+    digest: a803c8f93a1b7cf18f6e42113e1a7230ebd726ba32a1ad38eac0f9fddc86d359
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
+    icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
+    keywords:
+    - radarr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: radarr
+    urls:
+    - https://haijeploeg.github.io/arr-helm/radarr-1.0.5.tgz
+    version: 1.0.5
   - apiVersion: v2
     created: "2024-10-24T07:07:14.643874533Z"
     description: Movie organizer/manager for usenet and torrent users
@@ -213,6 +244,21 @@ entries:
     version: 0.0.1
   sonarr:
   - apiVersion: v2
+    created: "2024-10-24T10:10:15.331570504Z"
+    description: Movie organizer/manager for usenet and torrent users
+    digest: f6098ebaf631079528d2c173a87d10a737dd8979ce6e05d6d2a02a0b2ef90193
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sonarr
+    icon: https://github.com/sonarr/sonarr/blob/develop/Logo/512.png
+    keywords:
+    - sonarr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: sonarr
+    urls:
+    - https://haijeploeg.github.io/arr-helm/sonarr-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
     created: "2024-10-24T07:07:14.644273522Z"
     description: Movie organizer/manager for usenet and torrent users
     digest: 4e5cc94c8ce2b528adce7d4450cdea16958501f0793457080fa783c1a43b6868
@@ -302,4 +348,4 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/sonarr-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-24T07:07:14.643312748Z"
+generated: "2024-10-24T10:10:15.328884165Z"
