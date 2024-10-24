@@ -1,6 +1,6 @@
 # prowlarr
 
-Smart PVR for newsgroup and bittorrent users.
+Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs base stack to integrate with your various PVR apps.
 
 > This chart is not maintained by the upstream project. Bugs in the application needs to be filled in the upstream project. Issues about the helm chart can be filled in this repository.
 

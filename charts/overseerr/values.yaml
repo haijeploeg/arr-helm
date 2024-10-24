@@ -1,0 +1,53 @@
+---
+
+image:
+  tag: latest
+  pullPolicy: Always
+  repository: ghcr.io/sct/overseerr
+
+service:
+  port: 5055
+  type: ClusterIP
+
+config:
+  tz: Europe/Amsterdam
+
+ingress:
+  annotations: {}
+  ingressClassName: nginx
+  host: ""
+  tls: []
+  # - hosts:
+  #   - overseerr.example.com
+  #   secretName: overseerr-tls-secret
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+securityContext:
+  statefulSet:
+    runAsNonRoot: true
+    runAsUser: 1057
+    runAsGroup: 1057
+    fsGroup: 1057
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: [10000]
+    seccompProfile:
+      type: RuntimeDefault
+  pod:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: ["ALL"]
+
+storage:
+  config:
+    storage: 5Gi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
