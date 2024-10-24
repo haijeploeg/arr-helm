@@ -9,8 +9,9 @@ service:
   port: 8989
   type: ClusterIP
 
-env:
+config:
   tz: Europe/Amsterdam
+  # apikeySecret: sonarr-apikey
 
 ingress:
   annotations: {}
