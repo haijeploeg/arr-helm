@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   bazarr:
   - apiVersion: v2
-    created: "2024-10-24T11:26:07.363416943Z"
+    created: "2024-10-24T12:52:48.790294387Z"
     description: Bazarr is a companion application to Sonarr and Radarr
-    digest: d952e99c025b44503d9cbef3586fe59b8cbcca779dd438532728fb0683478f07
+    digest: bab8eee6f492835fdba3a55735439a604520b8e36e68c3214786df9591553c99
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/bazarr
     icon: https://github.com/morpheus65535/bazarr/blob/master/frontend/public/images/logo128.png
     keywords:
@@ -33,10 +33,10 @@ entries:
     version: 1.0.0
   prowlarr:
   - apiVersion: v2
-    created: "2024-10-24T11:26:07.363808781Z"
+    created: "2024-10-24T12:52:48.790701936Z"
     description: Prowlarr is an indexer manager/proxy built on the popular *arr .net/reactjs
       base stack to integrate with your various PVR apps
-    digest: af96db48f4f502fa1330f344dbf8ee7d7d258edd627cc8709ec3826f1bcedfed
+    digest: d30b5edeb654be2a6c86f2958e949307de6490ae671ec40fe9c4aa960eaddacc
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/prowlarr
     icon: https://github.com/prowlarr/prowlarr/blob/develop/Logo/512.png
     keywords:
@@ -50,9 +50,9 @@ entries:
     version: 1.0.0
   radarr:
   - apiVersion: v2
-    created: "2024-10-24T11:26:07.364195489Z"
+    created: "2024-10-24T12:52:48.79106861Z"
     description: Movie organizer/manager for usenet and torrent users
-    digest: 8141e0af1f4cce94f2d81ae340f09719b59b5d53a14ebe7da33af25ef7a2f173
+    digest: 1581f6557de2ae574d7db5da9f28d371fb801a01259e32304d786f1255d1cde8
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/radarr
     icon: https://github.com/Radarr/Radarr/blob/develop/Logo/512.png
     keywords:
@@ -274,11 +274,27 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/radarr-0.0.1.tgz
     version: 0.0.1
+  sabnzbd:
+  - apiVersion: v2
+    created: "2024-10-24T12:52:48.791430103Z"
+    description: SABnzbd - The automated Usenet download tool
+    digest: 79df59f3f3d2680a02d6a74d203945f9d270a5483a29af246a6699e1d2658314
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sabnzbd
+    icon: https://github.com/sabnzbd/sabnzbd/blob/develop/icons/logo-arrow.svg
+    keywords:
+    - sabnzbd
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: sabnzbd
+    urls:
+    - https://haijeploeg.github.io/arr-helm/sabnzbd-1.0.0.tgz
+    version: 1.0.0
   sonarr:
   - apiVersion: v2
-    created: "2024-10-24T11:26:07.364565435Z"
+    created: "2024-10-24T12:52:48.791803629Z"
     description: Movie organizer/manager for usenet and torrent users
-    digest: f3d98be44b12024733e1bf154de6f142731ddf0a1a23c0f86793e72d3e897370
+    digest: ca1bcb80d20b792ee51725e31b7e1873a4865b6fbbb35a466eb2e6f438ea6361
     home: https://github.com/haijeploeg/arr-helm/tree/main/charts/sonarr
     icon: https://github.com/sonarr/sonarr/blob/develop/Logo/512.png
     keywords:
@@ -380,4 +396,4 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/sonarr-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-24T11:26:07.362771798Z"
+generated: "2024-10-24T12:52:48.789778165Z"
