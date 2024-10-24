@@ -3,7 +3,7 @@
 apiVersion: v2
 description: Bazarr is a companion application to Sonarr and Radarr
 name: bazarr
-version: 1.0.0
+version: 1.0.1
 keywords:
   - bazarr
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/bazarr
