@@ -1,0 +1,61 @@
+---
+
+image:
+  tag: rolling
+  pullPolicy: Always
+  repository: ghcr.io/onedr0p/bazarr
+
+service:
+  port: 6767
+  type: ClusterIP
+
+config:
+  tz: Europe/Amsterdam
+
+ingress:
+  annotations: {}
+  ingressClassName: nginx
+  host: ""
+  tls: []
+  # - hosts:
+  #   - bazarr.example.com
+  #   secretName: bazarr-tls-secret
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+securityContext:
+  statefulSet:
+    runAsNonRoot: true
+    runAsUser: 1057
+    runAsGroup: 1057
+    fsGroup: 1057
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: [10000]
+    seccompProfile:
+      type: RuntimeDefault
+  pod:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: ["ALL"]
+
+storage:
+  config:
+    storage: 5Gi
+  tv:
+    nfs:
+      path: ""
+      server: ""
+  movies:
+    nfs:
+      path: ""
+      server: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -108,6 +108,8 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext.pod | nindent 12 }}
           volumeMounts:
+            - name: tmp
+              mountPath: /tmp
             - name: config
               mountPath: /config
             - name: tv
@@ -115,6 +117,8 @@ spec:
             - name: downloads
               mountPath: /downloads
       volumes:
+        - name: tmp
+          emptyDir: {}
         - name: config
           persistentVolumeClaim:
             claimName: {{ .Chart.Name }}-config
