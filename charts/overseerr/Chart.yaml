@@ -3,7 +3,7 @@
 apiVersion: v2
 description: Request management and media discovery tool for the Plex ecosystem
 name: overseerr
-version: 1.0.0
+version: 1.0.1
 keywords:
   - overseerr
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/overseerr
