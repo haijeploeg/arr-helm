@@ -40,5 +40,5 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 32400
       protocol: TCP
-      name: pms
+      name: http
       nodePort: {{ .Values.service.nodePort.port }}
