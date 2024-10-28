@@ -33,6 +33,7 @@ See `values.yaml` for a full list of all the options. Below are the most importa
 | `config.apikeySecret` | `string` | `N/A` | The existing secret containing the api key. The key should be `apikey` |
 | `config.advertiseUrl` | `string` | `N/A` | The advertise URLs of Plex, comma seperated |
 | `config.noAuthNetworks` | `string` | `N/A` | Comma seperated list of networks that can unauthenticated make connection to plex |
+| `config.claimTokenSecret` | `string` | `N/A` | Name of the secret that contains the PLEX_CLAIM_TOKEN from [https://plex.tv/claim](https://plex.tv/claim). The secret should contain a key `token`. |
 | `config.tz` | `string` | `Europe/Amsterdam` | The timezone |
 | `image.pullPolicy` | `string` | `Always` | The `imagePullPolicy` setting |
 | `image.repository` | `string` | `ghcr.io/onedr0p/plex-develop` | The image to use |
