@@ -37,6 +37,13 @@ spec:
             - name: PLEX_NO_AUTH_NETWORKS
               value: {{ .Values.config.noAuthNetworks }}
             {{- end }}
+            {{- if .Values.config.claimToken }}
+            - name: PLEX_CLAIM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.claimToken }}
+                  key: token
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

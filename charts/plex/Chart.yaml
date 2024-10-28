@@ -3,7 +3,7 @@
 apiVersion: v2
 description: A Helm chart for deploying the Plex Personal Media Server(PMS) server
 name: plex
-version: 1.0.0
+version: 1.0.1
 keywords:
   - plex
 home: https://github.com/haijeploeg/arr-helm/tree/main/charts/plex
