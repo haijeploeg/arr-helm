@@ -42,3 +42,5 @@ spec:
       protocol: TCP
       name: http
       nodePort: {{ .Values.service.nodePort.port }}
+  selector:
+    {{- include "plex.selectorLabels" . | nindent 4 }}
