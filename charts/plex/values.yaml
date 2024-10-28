@@ -1,9 +1,9 @@
 ---
 
 image:
-  tag: rolling
+  tag: latest
   pullPolicy: Always
-  repository: ghcr.io/onedr0p/plex
+  repository: plexinc/pms-docker
 
 service:
   port: 32400
@@ -26,26 +26,11 @@ ingress:
   #   - plex.example.com
   #   secretName: plex-tls-secret
 
-resources:
-  requests:
-    cpu: 100m
-    memory: 512Mi
+resources: {}
 
-# securityContext:
-#   statefulSet:
-#     runAsNonRoot: true
-#     runAsUser: 1057
-#     runAsGroup: 1057
-#     fsGroup: 1057
-#     fsGroupChangePolicy: OnRootMismatch
-#     supplementalGroups: [10000]
-#     seccompProfile:
-#       type: RuntimeDefault
-#   pod:
-#     allowPrivilegeEscalation: false
-#     readOnlyRootFilesystem: true
-#     capabilities:
-#       drop: ["ALL"]
+securityContext:
+  statefulSet: {}
+  pod: {}
 
 storage:
   config:
