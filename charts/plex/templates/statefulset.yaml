@@ -1,0 +1,98 @@
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    {{- include "plex.labels" . | nindent 4 }}
+    {{- with .Values.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "plex.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "plex.labels" . | nindent 8 }}
+        {{- with .Values.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: plex
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.config.tz | quote }}
+            - name: PLEX_ADVERTISE_URL
+              value: {{ .Values.config.advertiseUrl }}
+            {{- if .Values.config.noAuthNetworks }}
+            - name: PLEX_NO_AUTH_NETWORKS
+              value: {{ .Values.config.noAuthNetworks }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /identity
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /identity
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: transcode
+              mountPath: /transcode
+            - name: config
+              mountPath: /config
+            - name: tv
+              mountPath: /tv
+            - name: movies
+              mountPath: /movies
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: transcode
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ .Chart.Name }}-config
+        - name: tv
+          nfs:
+            path: {{ .Values.storage.tv.nfs.path }}
+            server: {{ .Values.storage.tv.nfs.server }}
+        - name: movies
+          nfs:
+            path: {{ .Values.storage.movies.nfs.path }}
+            server: {{ .Values.storage.movies.nfs.server }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

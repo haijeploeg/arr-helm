@@ -1,0 +1,66 @@
+---
+
+image:
+  tag: rolling
+  pullPolicy: Always
+  repository: ghcr.io/onedr0p/plex
+
+service:
+  port: 32400
+  type: ClusterIP
+  nodePort:
+    port: 32400
+    # annotations:
+    #   metallb.universe.tf/ip-allocated-from-pool: homelab-ip-pool
+    #   metallb.universe.tf/loadBalancerIPs: 192.168.0.241
+
+config:
+  tz: Europe/Amsterdam
+
+ingress:
+  annotations: {}
+  ingressClassName: nginx
+  host: ""
+  tls: []
+  # - hosts:
+  #   - plex.example.com
+  #   secretName: plex-tls-secret
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+securityContext:
+  statefulSet:
+    runAsNonRoot: true
+    runAsUser: 1057
+    runAsGroup: 1057
+    fsGroup: 1057
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups: [10000]
+    seccompProfile:
+      type: RuntimeDefault
+  pod:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: ["ALL"]
+
+storage:
+  config:
+    storage: 5Gi
+  tv:
+    nfs:
+      path: ""
+      server: ""
+  movies:
+    nfs:
+      path: ""
+      server: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
