@@ -3,7 +3,7 @@
 image:
   tag: latest
   pullPolicy: Always
-  repository: plexinc/pms-docker
+  repository: lscr.io/linuxserver/plex
 
 service:
   port: 32400
@@ -25,6 +25,9 @@ ingress:
   # - hosts:
   #   - plex.example.com
   #   secretName: plex-tls-secret
+
+gpu:
+  intel: false
 
 resources: {}
 

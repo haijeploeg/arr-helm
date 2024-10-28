@@ -31,14 +31,16 @@ spec:
           env:
             - name: TZ
               value: {{ .Values.config.tz | quote }}
-            - name: PLEX_ADVERTISE_URL
-              value: {{ .Values.config.advertiseUrl }}
-            {{- if .Values.config.noAuthNetworks }}
-            - name: PLEX_NO_AUTH_NETWORKS
-              value: {{ .Values.config.noAuthNetworks }}
+            - name: VERSION
+              value: docker
+            - name: ADVERTISE_IP
+              value: {{ .Values.config.advertiseIp }}
+            {{- if .Values.config.allowedNetworks }}
+            - name: ALLOWED_NETWORKS
+              value: {{ .Values.config.allowedNetworks }}
             {{- end }}
             {{- if .Values.config.claimTokenSecret }}
-            - name: PLEX_CLAIM_TOKEN
+            - name: PLEX_CLAIM
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.config.claimTokenSecret }}
@@ -75,6 +77,10 @@ spec:
               mountPath: /tv
             - name: movies
               mountPath: /movies
+            {{- if .Values.gpu.intel }}
+            - name: intel
+              mountPath: /dev/dri
+            {{- end }}
       volumes:
         - name: tmp
           emptyDir: {}
@@ -91,6 +97,11 @@ spec:
           nfs:
             path: {{ .Values.storage.movies.nfs.path }}
             server: {{ .Values.storage.movies.nfs.server }}
+        {{- if .Values.gpu.intel }}
+        - name: intel
+          hostPath:
+            path: /dev/dri
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
