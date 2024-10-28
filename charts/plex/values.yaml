@@ -31,21 +31,21 @@ resources:
     cpu: 100m
     memory: 512Mi
 
-securityContext:
-  statefulSet:
-    runAsNonRoot: true
-    runAsUser: 1057
-    runAsGroup: 1057
-    fsGroup: 1057
-    fsGroupChangePolicy: OnRootMismatch
-    supplementalGroups: [10000]
-    seccompProfile:
-      type: RuntimeDefault
-  pod:
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop: ["ALL"]
+# securityContext:
+#   statefulSet:
+#     runAsNonRoot: true
+#     runAsUser: 1057
+#     runAsGroup: 1057
+#     fsGroup: 1057
+#     fsGroupChangePolicy: OnRootMismatch
+#     supplementalGroups: [10000]
+#     seccompProfile:
+#       type: RuntimeDefault
+#   pod:
+#     allowPrivilegeEscalation: false
+#     readOnlyRootFilesystem: true
+#     capabilities:
+#       drop: ["ALL"]
 
 storage:
   config:
