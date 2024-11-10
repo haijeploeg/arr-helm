@@ -1,5 +1,5 @@
-[![release](https://github.com/haijeploeg/arr-helm/actions/workflows/release.yaml/badge.svg)](https://github.com/haijeploeg/arr-helm/actions/workflows/release.yaml)
+[![release](https://github.com/haijeploeg/charts/actions/workflows/release.yaml/badge.svg)](https://github.com/haijeploeg/charts/actions/workflows/release.yaml)
 
-# arr-helm
+# Charts
 
-This repo contains all kinds of arr applications packaged in helm charts to use on kubernetes safely. All containers run as a non root user an contains all kind of fancy features for homelab enthousiastics.
+This repo contains a collection of charts that is used in my homelab. If you have any questions regarding the setup or if you have feature requests, feel free to submit an issue!

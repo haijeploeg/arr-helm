@@ -1,0 +1,103 @@
+{{- if .Values.radarr.enable }}
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: radarr
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "radarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.radarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "radarr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "radarr.selectorLabels" . | nindent 8 }}
+        {{- with .Values.radarr.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.radarr.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: radarr
+          image: "{{ .Values.radarr.image.repository }}:{{ .Values.radarr.image.tag }}"
+          imagePullPolicy: {{ .Values.radarr.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.shared.config.tz | quote }}
+            - name: PUID
+              value: {{ .Values.shared.config.puid | quote }}
+            - name: PGID
+              value: {{ .Values.shared.config.pgid | quote }}
+            {{- if .Values.radarr.config.apikeySecret }}
+            - name: RADARR__AUTH__APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.radarr.config.apikeySecret }}
+                  key: apikey
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.radarr.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: {{ .Values.radarr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: {{ .Values.radarr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.radarr.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.radarr.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /config
+            - name: movies
+              mountPath: /movies
+            - name: downloads
+              mountPath: /downloads
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: radarr-config
+        - name: movies
+          nfs:
+            path: {{ .Values.shared.storage.movies.nfs.path }}
+            server: {{ .Values.shared.storage.movies.nfs.server }}
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: piratestack-downloads
+      {{- with .Values.radarr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.radarr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.radarr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}

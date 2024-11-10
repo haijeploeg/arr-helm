@@ -1,0 +1,25 @@
+{{- if .Values.sonarr.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "sonarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.sonarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.sonarr.storage.config.storageClassName }}
+  storageClassName: {{ .Values.sonarr.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.sonarr.storage.config.storage }}
+
+{{- end }}

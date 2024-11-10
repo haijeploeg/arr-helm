@@ -1,0 +1,85 @@
+{{- if .Values.overseerr.enable }}
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: overseerr
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "overseerr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.overseerr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "overseerr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "overseerr.selectorLabels" . | nindent 8 }}
+        {{- with .Values.overseerr.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.overseerr.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: overseerr
+          image: "{{ .Values.overseerr.image.repository }}:{{ .Values.overseerr.image.tag }}"
+          imagePullPolicy: {{ .Values.overseerr.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.shared.config.tz | quote }}
+            - name: PUID
+              value: {{ .Values.shared.config.puid | quote }}
+            - name: PGID
+              value: {{ .Values.shared.config.pgid | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.overseerr.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: {{ .Values.overseerr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: {{ .Values.overseerr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.overseerr.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.overseerr.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: overseerr-config
+      {{- with .Values.overseerr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.overseerr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.overseerr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}

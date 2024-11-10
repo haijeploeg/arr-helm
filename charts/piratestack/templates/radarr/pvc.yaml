@@ -1,0 +1,25 @@
+{{- if .Values.radarr.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "radarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.radarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.radarr.storage.config.storageClassName }}
+  storageClassName: {{ .Values.radarr.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.radarr.storage.config.storage }}
+
+{{- end }}

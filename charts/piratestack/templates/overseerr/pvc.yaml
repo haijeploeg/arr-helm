@@ -1,0 +1,25 @@
+{{- if .Values.overseerr.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: overseerr-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "overseerr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.overseerr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.overseerr.storage.config.storageClassName }}
+  storageClassName: {{ .Values.overseerr.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.overseerr.storage.config.storage }}
+
+{{- end }}

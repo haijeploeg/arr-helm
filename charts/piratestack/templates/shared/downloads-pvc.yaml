@@ -1,0 +1,20 @@
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: piratestack-downloads
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- with .Values.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  {{- if .Values.shared.storage.downloads.storageClassName }}
+  storageClassName: {{ .Values.shared.storage.downloads.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.shared.storage.downloads.storage }}

@@ -1,0 +1,37 @@
+{{- if .Values.sonarr.enable }}
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr-ingress
+  {{- with .Values.sonarr.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "sonarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.sonarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  ingressClassName: {{ .Values.sonarr.ingress.ingressClassName }}
+  rules:
+  - host: {{ .Values.sonarr.ingress.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: sonarr-service
+            port:
+              number: {{ .Values.sonarr.service.port }}
+        path: /
+        pathType: Prefix
+  {{- with .Values.sonarr.ingress.tls }}
+  tls:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+{{- end }}

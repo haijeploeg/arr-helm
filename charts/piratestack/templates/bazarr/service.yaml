@@ -1,0 +1,25 @@
+{{- if .Values.bazarr.enable }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bazarr-service
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "bazarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.bazarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  type: {{ .Values.bazarr.service.type }}
+  ports:
+    - port: {{ .Values.bazarr.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "bazarr.selectorLabels" . | nindent 4 }}
+
+{{- end }}

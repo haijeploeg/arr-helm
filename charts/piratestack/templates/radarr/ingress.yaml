@@ -1,0 +1,37 @@
+{{- if .Values.radarr.enable }}
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr-ingress
+  {{- with .Values.radarr.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "radarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.radarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  ingressClassName: {{ .Values.radarr.ingress.ingressClassName }}
+  rules:
+  - host: {{ .Values.radarr.ingress.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: radarr-service
+            port:
+              number: {{ .Values.radarr.service.port }}
+        path: /
+        pathType: Prefix
+  {{- with .Values.radarr.ingress.tls }}
+  tls:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+{{- end }}
