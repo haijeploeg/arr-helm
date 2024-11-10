@@ -1,0 +1,25 @@
+{{- if .Values.radarr.enable }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr-service
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "radarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.radarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  type: {{ .Values.radarr.service.type }}
+  ports:
+    - port: {{ .Values.radarr.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "radarr.selectorLabels" . | nindent 4 }}
+
+{{- end }}

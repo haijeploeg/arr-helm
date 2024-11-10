@@ -1,0 +1,12 @@
+---
+
+apiVersion: v2
+description: Full arr based setup for homelab
+name: piratestack
+version: 1.0.0
+keywords:
+  - sonarr
+home: https://github.com/haijeploeg/charts/tree/main/charts/piratestack
+maintainers:
+  - name: haijeploeg
+    email: ploeg.haije@gmail.com

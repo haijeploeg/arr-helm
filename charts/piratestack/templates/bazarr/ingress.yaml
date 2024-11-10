@@ -1,0 +1,36 @@
+{{- if .Values.bazarr.enable }}
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bazarr-ingress
+  {{- with .Values.bazarr.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "bazarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.bazarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  ingressClassName: {{ .Values.bazarr.ingress.ingressClassName }}
+  rules:
+  - host: {{ .Values.bazarr.ingress.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: bazarr-service
+            port:
+              number: {{ .Values.bazarr.service.port }}
+        path: /
+        pathType: Prefix
+  {{- with .Values.bazarr.ingress.tls }}
+  tls:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+
+{{- end}}

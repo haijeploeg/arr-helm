@@ -1,0 +1,97 @@
+{{- if .Values.bazarr.enable }}
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bazarr
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "bazarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.bazarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "bazarr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "bazarr.selectorLabels" . | nindent 8 }}
+        {{- with .Values.bazarr.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.bazarr.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: bazarr
+          image: "{{ .Values.bazarr.image.repository }}:{{ .Values.bazarr.image.tag }}"
+          imagePullPolicy: {{ .Values.bazarr.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.shared.config.tz | quote }}
+            - name: PUID
+              value: {{ .Values.shared.config.puid | quote }}
+            - name: PGID
+              value: {{ .Values.shared.config.pgid | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.bazarr.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.bazarr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: {{ .Values.bazarr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.bazarr.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.bazarr.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /config
+            - name: tv
+              mountPath: /tv
+            - name: movies
+              mountPath: /movies
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: bazarr-config
+        - name: tv
+          nfs:
+            path: {{ .Values.shared.storage.tv.nfs.path }}
+            server: {{ .Values.shared.storage.tv.nfs.server }}
+        - name: movies
+          nfs:
+            path: {{ .Values.shared.storage.movies.nfs.path }}
+            server: {{ .Values.shared.storage.movies.nfs.server }}
+      {{- with .Values.bazarr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.bazarr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.bazarr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}

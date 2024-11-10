@@ -1,0 +1,110 @@
+{{- if .Values.sabnzbd.enable }}
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sabnzbd
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "sabnzbd.selectorLabels" . | nindent 4 }}
+    {{- with .Values.sabnzbd.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "sabnzbd.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "sabnzbd.selectorLabels" . | nindent 8 }}
+        {{- with .Values.sabnzbd.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.sabnzbd.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: sabnzbd
+          image: "{{ .Values.sabnzbd.image.repository }}:{{ .Values.sabnzbd.image.tag }}"
+          imagePullPolicy: {{ .Values.sabnzbd.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.shared.config.tz | quote }}
+            - name: PUID
+              value: {{ .Values.shared.config.puid | quote }}
+            - name: PGID
+              value: {{ .Values.shared.config.pgid | quote }}
+            {{- if .Values.sabnzbd.config.apikeySecret }}
+            - name: SABNZBD__API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sabnzbd.config.apikeySecret }}
+                  key: apikey
+            - name: SABNZBD__NZB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sabnzbd.config.apikeySecret }}
+                  key: apikey
+            {{- end }}
+            - name: SABNZBD__HOST_WHITELIST_ENTRIES
+              value: >-
+                sabnzbd,
+                sabnzbd.default,
+                sabnzbd.default.svc,
+                sabnzbd.default.svc.cluster,
+                sabnzbd.default.svc.cluster.local,
+                {{ .Values.sabnzbd.ingress.host }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.sabnzbd.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api?mode=version
+              port: {{ .Values.sabnzbd.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api?mode=version
+              port: {{ .Values.sabnzbd.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.sabnzbd.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.sabnzbd.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: sabnzbd-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: piratestack-downloads
+      {{- with .Values.sabnzbd.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.sabnzbd.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.sabnzbd.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}

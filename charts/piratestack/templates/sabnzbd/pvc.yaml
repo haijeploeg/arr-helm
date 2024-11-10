@@ -1,0 +1,25 @@
+{{- if .Values.sabnzbd.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sabnzbd-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "sabnzbd.selectorLabels" . | nindent 4 }}
+    {{- with .Values.sabnzbd.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.sabnzbd.storage.config.storageClassName }}
+  storageClassName: {{ .Values.sabnzbd.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.sabnzbd.storage.config.storage }}
+
+{{- end }}

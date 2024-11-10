@@ -1,0 +1,25 @@
+{{- if .Values.bazarr.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "bazarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.bazarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.bazarr.storage.config.storageClassName }}
+  storageClassName: {{ .Values.bazarr.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.bazarr.storage.config.storage }}
+
+{{- end }}

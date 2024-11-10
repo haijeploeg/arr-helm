@@ -1,0 +1,25 @@
+{{- if .Values.prowlarr.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prowlarr-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "prowlarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.prowlarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.prowlarr.storage.config.storageClassName }}
+  storageClassName: {{ .Values.prowlarr.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.prowlarr.storage.config.storage }}
+
+{{- end }}

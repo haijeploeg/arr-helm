@@ -1,0 +1,259 @@
+---
+
+shared:
+  config:
+    tz: Europe/Amsterdam
+    puid: 1057
+    pgid: 1057
+
+  storage:
+    downloads:
+      storage: 500Gi
+    movies:
+      nfs:
+        path: ""
+        server: ""
+    tv:
+      nfs:
+        server: ""
+        path: ""
+
+bazarr:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/bazarr
+
+  service:
+    port: 6767
+    type: ClusterIP
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - bazarr.example.com
+    #   secretName: bazarr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+overseerr:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/overseerr
+
+  service:
+    port: 5055
+    type: ClusterIP
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - overseerr.example.com
+    #   secretName: overseerr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+prowlarr:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/prowlarr
+
+  service:
+    port: 9696
+    type: ClusterIP
+
+  config: {}
+  #   apikeySecret: prowlarr-apikey
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - prowlarr.example.com
+    #   secretName: prowlarr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+radarr:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/radarr
+
+  service:
+    port: 7878
+    type: ClusterIP
+
+  config: {}
+  #   apikeySecret: radarr-apikey
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - radarr.example.com
+    #   secretName: radarr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+sabnzbd:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/sabnzbd
+
+  config: {}
+  #   apikeySecret: sabnzbd-apikey
+
+  service:
+    port: 8080
+    type: ClusterIP
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - sabnzbd.example.com
+    #   secretName: sabnzbd-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+sonarr:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/sonarr
+
+  service:
+    port: 8989
+    type: ClusterIP
+
+  config: {}
+  #   apikeySecret: sonarr-apikey
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - sonarr.example.com
+    #   secretName: sonarr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
