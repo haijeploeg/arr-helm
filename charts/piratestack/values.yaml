@@ -8,6 +8,8 @@ shared:
 
   storage:
     downloads:
+      accessModes:
+        - ReadWriteMany
       storage: 500Gi
     movies:
       nfs:
