@@ -259,3 +259,41 @@ sonarr:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+
+tautulli:
+  enable: true
+
+  image:
+    tag: latest
+    pullPolicy: Always
+    repository: lscr.io/linuxserver/tautulli
+
+  service:
+    port: 8181
+    type: ClusterIP
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - bazarr.example.com
+    #   secretName: bazarr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
