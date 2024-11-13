@@ -1,0 +1,25 @@
+{{- if .Values.tautulli.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tautulli-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "tautulli.selectorLabels" . | nindent 4 }}
+    {{- with .Values.tautulli.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.tautulli.storage.config.storageClassName }}
+  storageClassName: {{ .Values.tautulli.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.tautulli.storage.config.storage }}
+
+{{- end }}

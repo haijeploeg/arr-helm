@@ -1,0 +1,85 @@
+{{- if .Values.tautulli.enable }}
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tautulli
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "tautulli.selectorLabels" . | nindent 4 }}
+    {{- with .Values.tautulli.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "tautulli.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "tautulli.selectorLabels" . | nindent 8 }}
+        {{- with .Values.tautulli.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.tautulli.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: tautulli
+          image: "{{ .Values.tautulli.image.repository }}:{{ .Values.tautulli.image.tag }}"
+          imagePullPolicy: {{ .Values.tautulli.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.shared.config.tz | quote }}
+            - name: PUID
+              value: {{ .Values.shared.config.puid | quote }}
+            - name: PGID
+              value: {{ .Values.shared.config.pgid | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.tautulli.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: {{ .Values.tautulli.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: {{ .Values.tautulli.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.tautulli.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.tautulli.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: tautulli-config
+      {{- with .Values.tautulli.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tautulli.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tautulli.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}

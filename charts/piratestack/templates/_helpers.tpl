@@ -32,6 +32,10 @@ app.kubernetes.io/app: sabnzbd
 app.kubernetes.io/app: overseerr
 {{- end }}
 
+{{- define "tautulli.selectorLabels" -}}
+app.kubernetes.io/app: tautulli
+{{- end }}
+
 {{/*
 Common labels
 */}}
