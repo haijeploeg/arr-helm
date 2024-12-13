@@ -24,7 +24,7 @@ bazarr:
   enable: true
 
   image:
-    tag: latest
+    tag: 1.4.5
     pullPolicy: Always
     repository: lscr.io/linuxserver/bazarr
 
@@ -62,7 +62,7 @@ overseerr:
   enable: true
 
   image:
-    tag: latest
+    tag: 1.33.2
     pullPolicy: Always
     repository: lscr.io/linuxserver/overseerr
 
@@ -100,7 +100,7 @@ prowlarr:
   enable: true
 
   image:
-    tag: latest
+    tag: 1.27.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/prowlarr
 
@@ -141,7 +141,7 @@ radarr:
   enable: true
 
   image:
-    tag: latest
+    tag: 5.15.1
     pullPolicy: Always
     repository: lscr.io/linuxserver/radarr
 
@@ -182,7 +182,7 @@ sabnzbd:
   enable: true
 
   image:
-    tag: latest
+    tag: 4.3.3
     pullPolicy: Always
     repository: lscr.io/linuxserver/sabnzbd
 
@@ -223,7 +223,7 @@ sonarr:
   enable: true
 
   image:
-    tag: latest
+    tag: 4.0.11
     pullPolicy: Always
     repository: lscr.io/linuxserver/sonarr
 
@@ -264,7 +264,7 @@ tautulli:
   enable: true
 
   image:
-    tag: latest
+    tag: 2.15.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/tautulli
 
