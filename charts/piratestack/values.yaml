@@ -264,7 +264,7 @@ tautulli:
   enable: true
 
   image:
-    tag: 2.15.0
+    tag: 2021.12.16
     pullPolicy: Always
     repository: lscr.io/linuxserver/tautulli
 
