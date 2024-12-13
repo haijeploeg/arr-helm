@@ -62,7 +62,7 @@ overseerr:
   enable: true
 
   image:
-    tag: 1.33.2
+    tag: 2021.12.12
     pullPolicy: Always
     repository: lscr.io/linuxserver/overseerr
 
