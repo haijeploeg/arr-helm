@@ -3,7 +3,7 @@
 apiVersion: v2
 description: Full arr based setup for homelab
 name: piratestack
-version: 1.1.0
+version: 1.1.1
 keywords:
   - sonarr
 home: https://github.com/haijeploeg/charts/tree/main/charts/piratestack
