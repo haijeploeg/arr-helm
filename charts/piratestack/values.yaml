@@ -24,7 +24,7 @@ bazarr:
   enable: true
 
   image:
-    tag: 1.4.5
+    tag: 1.5.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/bazarr
 
@@ -100,7 +100,7 @@ prowlarr:
   enable: true
 
   image:
-    tag: 1.27.0
+    tag: 1.28.2
     pullPolicy: Always
     repository: lscr.io/linuxserver/prowlarr
 
@@ -141,7 +141,7 @@ radarr:
   enable: true
 
   image:
-    tag: 5.15.1
+    tag: 5.16.3
     pullPolicy: Always
     repository: lscr.io/linuxserver/radarr
 
@@ -182,7 +182,7 @@ sabnzbd:
   enable: true
 
   image:
-    tag: 4.4.0
+    tag: 4.4.1
     pullPolicy: Always
     repository: lscr.io/linuxserver/sabnzbd
 
