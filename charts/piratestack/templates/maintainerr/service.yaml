@@ -1,0 +1,25 @@
+{{- if .Values.maintainerr.enable }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: maintainerr-service
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "maintainerr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.maintainerr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  type: {{ .Values.maintainerr.service.type }}
+  ports:
+    - port: {{ .Values.maintainerr.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "maintainerr.selectorLabels" . | nindent 4 }}
+
+{{- end }}

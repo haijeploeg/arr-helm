@@ -1,0 +1,85 @@
+{{- if .Values.maintainerr.enable }}
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: maintainerr
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "maintainerr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.maintainerr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "maintainerr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "maintainerr.selectorLabels" . | nindent 8 }}
+        {{- with .Values.maintainerr.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      securityContext:
+      {{- toYaml .Values.maintainerr.securityContext.statefulSet | nindent 8 }}
+      containers:
+        - name: maintainerr
+          image: "{{ .Values.maintainerr.image.repository }}:{{ .Values.maintainerr.image.tag }}"
+          imagePullPolicy: {{ .Values.maintainerr.image.pullPolicy }}
+          env:
+            - name: TZ
+              value: {{ .Values.shared.config.tz | quote }}
+            - name: PUID
+              value: {{ .Values.shared.config.puid | quote }}
+            - name: PGID
+              value: {{ .Values.shared.config.pgid | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.maintainerr.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.maintainerr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.maintainerr.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.maintainerr.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.maintainerr.securityContext.pod | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: config
+              mountPath: /opt/data
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: maintainerr-config
+      {{- with .Values.maintainerr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.maintainerr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.maintainerr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}

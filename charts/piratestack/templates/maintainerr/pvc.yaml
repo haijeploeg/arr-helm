@@ -1,0 +1,25 @@
+{{- if .Values.maintainerr.enable }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: maintainerr-config
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "maintainerr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.maintainerr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.maintainerr.storage.config.storageClassName }}
+  storageClassName: {{ .Values.maintainerr.storage.config.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.maintainerr.storage.config.storage }}
+
+{{- end }}

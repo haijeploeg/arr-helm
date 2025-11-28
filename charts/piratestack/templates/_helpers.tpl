@@ -36,6 +36,10 @@ app.kubernetes.io/app: overseerr
 app.kubernetes.io/app: tautulli
 {{- end }}
 
+{{- define "maintainerr.selectorLabels" -}}
+app.kubernetes.io/app: maintainerr
+{{- end }}
+
 {{/*
 Common labels
 */}}

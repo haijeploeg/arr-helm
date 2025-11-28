@@ -20,6 +20,44 @@ shared:
         server: ""
         path: ""
 
+maintainerr:
+  enable: true
+
+  image:
+    tag: 2.21.0
+    pullPolicy: Always
+    repository: ghcr.io/maintainerr/maintainerr
+
+  service:
+    port: 6246
+    type: ClusterIP
+
+  ingress:
+    annotations: {}
+    ingressClassName: nginx
+    host: ""
+    tls: []
+    # - hosts:
+    #   - maintainerr.example.com
+    #   secretName: maintainerr-tls-secret
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  storage:
+    config:
+      storage: 5Gi
+
+  securityContext:
+    statefulSet: {}
+    pod: {}
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
 bazarr:
   enable: true
 
