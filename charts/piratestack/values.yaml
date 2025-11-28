@@ -61,7 +61,6 @@ maintainerr:
       capabilities:
         drop:
           - ALL
-      readOnlyRootFilesystem: true
 
   nodeSelector: {}
   tolerations: []
