@@ -51,8 +51,17 @@ maintainerr:
       storage: 5Gi
 
   securityContext:
-    statefulSet: {}
-    pod: {}
+    statefulSet:
+      fsGroup: 1000
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+    pod:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
 
   nodeSelector: {}
   tolerations: []
