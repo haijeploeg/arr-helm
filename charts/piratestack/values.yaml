@@ -146,7 +146,7 @@ prowlarr:
   enable: true
 
   image:
-    tag: 1.29.2
+    tag: 2.3.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/prowlarr
 
