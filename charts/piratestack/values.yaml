@@ -108,7 +108,7 @@ overseerr:
   enable: true
 
   image:
-    tag: 1.33.2
+    tag: 1.34.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/overseerr
 
