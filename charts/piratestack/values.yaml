@@ -24,7 +24,7 @@ maintainerr:
   enable: true
 
   image:
-    tag: 2.21.0
+    tag: 2.26.0
     pullPolicy: Always
     repository: ghcr.io/maintainerr/maintainerr
 
