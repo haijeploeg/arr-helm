@@ -1,5 +1,7 @@
-[![release](https://github.com/haijeploeg/charts/actions/workflows/release.yaml/badge.svg)](https://github.com/haijeploeg/charts/actions/workflows/release.yaml)
+[![release](https://github.com/haijeploeg/arr-helm/actions/workflows/release.yaml/badge.svg)](https://github.com/haijeploeg/arr-helm/actions/workflows/release.yaml)
 
-# Charts
+# arr-helm
 
-This repo contains a collection of charts that is used in my homelab. If you have any questions regarding the setup or if you have feature requests, feel free to submit an issue!
+A collection of Helm charts for my homelab. Currently contains the **[piratestack](charts/piratestack/README.md)** chart — a full media stack bundling Sonarr, Radarr, Bazarr, Prowlarr, Sabnzbd, Overseerr, Tautulli and Maintainerr into a single Helm release.
+
+Questions or feature requests? Just open an issue!
