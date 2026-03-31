@@ -12,8 +12,8 @@
   "rebaseWhen": "auto",
   "packageRules": [
     {
-      "automerge": true,
       "matchManagers": ["helm-values"],
+      "groupName": "helm chart dependencies",
       "bumpVersions": [
         {
           "name": "Bump chart version",
@@ -24,9 +24,8 @@
       ]
     },
     {
-      "automerge": true,
-      "matchPackagePatterns": ["*"],
-      "groupName": "all dependencies"
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
     }
   ]
 }
