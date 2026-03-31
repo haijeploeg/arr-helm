@@ -24,7 +24,7 @@ maintainerr:
   enable: true
 
   image:
-    tag: 2.21.0
+    tag: 3.3.0
     pullPolicy: Always
     repository: ghcr.io/maintainerr/maintainerr
 
@@ -146,7 +146,7 @@ prowlarr:
   enable: true
 
   image:
-    tag: 1.29.2
+    tag: 2.3.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/prowlarr
 
@@ -187,7 +187,7 @@ radarr:
   enable: true
 
   image:
-    tag: 5.17.2
+    tag: 6.0.4
     pullPolicy: Always
     repository: lscr.io/linuxserver/radarr
 
