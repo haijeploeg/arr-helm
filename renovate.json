@@ -10,23 +10,23 @@
   "automerge": true,
   "automergeType": "pr",
   "rebaseWhen": "auto",
-  "bumpVersions": [
-    {
-      "name": "Bump chart version",
-      "filePatterns": [
-        "{{packageFileDir}}/Chart.yaml"
-      ],
-      "matchStrings": [
-        "version:\\s(?<version>[^\\s]+)"
-      ],
-      "bumpType": "minor"
-    }
-  ],
   "packageRules": [
     {
+      "automerge": true,
+      "matchManagers": ["helm-values"],
+      "bumpVersions": [
+        {
+          "name": "Bump chart version",
+          "filePatterns": ["charts/piratestack/Chart.yaml"],
+          "matchStrings": ["version:\\s(?<version>[^\\s]+)"],
+          "bumpType": "minor"
+        }
+      ]
+    },
+    {
+      "automerge": true,
       "matchPackagePatterns": ["*"],
-      "groupName": "all dependencies",
-      "automerge": true
+      "groupName": "all dependencies"
     }
   ]
 }
