@@ -3,51 +3,80 @@
   "extends": [
     "config:recommended"
   ],
-  "baseBranches": ["main"],
+  "baseBranches": [
+    "main"
+  ],
   "dependencyDashboard": false,
   "automerge": true,
   "automergeType": "pr",
-  "bumpVersion": "patch",
   "rebaseWhen": "auto",
+  "bumpVersions": [
+    {
+      "name": "Bump chart version",
+      "filePatterns": [
+        "{{packageFileDir}}/Chart.yaml"
+      ],
+      "matchStrings": [
+        "version:\\s(?<version>[^\\s]+)"
+      ],
+      "bumpType": "{{#if isPatch}}patch{{else if isMinor}}minor{{else}}major{{/if}}"
+    }
+  ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["sonarr"],
+      "matchPackagePatterns": [
+        "sonarr"
+      ],
       "groupName": "sonarr",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["radarr"],
+      "matchPackagePatterns": [
+        "radarr"
+      ],
       "groupName": "radarr",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["bazarr"],
+      "matchPackagePatterns": [
+        "bazarr"
+      ],
       "groupName": "bazarr",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["prowlarr"],
+      "matchPackagePatterns": [
+        "prowlarr"
+      ],
       "groupName": "prowlarr",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["sabnzbd"],
+      "matchPackagePatterns": [
+        "sabnzbd"
+      ],
       "groupName": "sabnzbd",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["overseerr"],
+      "matchPackagePatterns": [
+        "overseerr"
+      ],
       "groupName": "overseerr",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["tautulli"],
+      "matchPackagePatterns": [
+        "tautulli"
+      ],
       "groupName": "tautulli",
       "automerge": true
     },
     {
-      "matchPackagePatterns": ["maintainerr"],
-      "groupName": "maintainerr", 
+      "matchPackagePatterns": [
+        "maintainerr"
+      ],
+      "groupName": "maintainerr",
       "automerge": true
     }
   ]
