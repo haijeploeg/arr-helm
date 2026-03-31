@@ -187,7 +187,7 @@ radarr:
   enable: true
 
   image:
-    tag: 5.17.2
+    tag: 6.0.4
     pullPolicy: Always
     repository: lscr.io/linuxserver/radarr
 
