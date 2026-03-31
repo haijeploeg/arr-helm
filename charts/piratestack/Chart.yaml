@@ -6,7 +6,15 @@ name: piratestack
 version: 1.2.2
 keywords:
   - sonarr
+  - radarr
+  - tautulli
+  - overseerr
+  - prowlarr
+  - sabnzbd
+  - bazarr
+  - maintainerr
 home: https://github.com/haijeploeg/charts/tree/main/charts/piratestack
 maintainers:
   - name: haijeploeg
     email: ploeg.haije@gmail.com
+ 

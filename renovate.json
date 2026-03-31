@@ -4,5 +4,14 @@
     "config:recommended"
   ],
   "baseBranches": ["staging"],
-  "dependencyDashboard": false
+  "dependencyDashboard": false,
+  "automerge": true,
+  "automergeType": "pr",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "groupName": "all dependencies",
+      "automerge": true
+    }
+  ]
 }
