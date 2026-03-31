@@ -7,10 +7,47 @@
   "dependencyDashboard": false,
   "automerge": true,
   "automergeType": "pr",
+  "bumpVersion": "patch",
+  "rebaseWhen": "auto",
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
-      "groupName": "all dependencies",
+      "matchPackagePatterns": ["sonarr"],
+      "groupName": "sonarr",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["radarr"],
+      "groupName": "radarr",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["bazarr"],
+      "groupName": "bazarr",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["prowlarr"],
+      "groupName": "prowlarr",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["sabnzbd"],
+      "groupName": "sabnzbd",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["overseerr"],
+      "groupName": "overseerr",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["tautulli"],
+      "groupName": "tautulli",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["maintainerr"],
+      "groupName": "maintainerr", 
       "automerge": true
     }
   ]
