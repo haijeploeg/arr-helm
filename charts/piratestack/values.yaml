@@ -45,6 +45,8 @@ maintainerr:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -91,6 +93,8 @@ bazarr:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -129,6 +133,8 @@ overseerr:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -170,6 +176,8 @@ prowlarr:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -211,6 +219,8 @@ radarr:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -252,6 +262,8 @@ sabnzbd:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -293,6 +305,8 @@ sonarr:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
@@ -331,6 +345,8 @@ tautulli:
     requests:
       cpu: 100m
       memory: 128Mi
+    limits:
+      memory: 512Mi
 
   storage:
     config:
