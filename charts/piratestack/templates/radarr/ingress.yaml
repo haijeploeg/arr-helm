@@ -1,4 +1,4 @@
-{{- if .Values.radarr.enable }}
+{{- if and .Values.radarr.enable .Values.radarr.ingress.enabled }}
 
 ---
 

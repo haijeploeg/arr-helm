@@ -1,4 +1,4 @@
-{{- if .Values.sabnzbd.enable }}
+{{- if and .Values.sabnzbd.enable .Values.sabnzbd.ingress.enabled }}
 
 ---
 

@@ -24,6 +24,9 @@ spec:
         {{- with .Values.radarr.additionalLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        {{- if has "ReadWriteOnce" .Values.shared.storage.downloads.accessModes }}
+        piratestack/uses-downloads: "true"
+        {{- end }}
     spec:
       securityContext:
       {{- toYaml .Values.radarr.securityContext.statefulSet | nindent 8 }}
@@ -81,9 +84,14 @@ spec:
           persistentVolumeClaim:
             claimName: radarr-config
         - name: movies
+          {{- if .Values.shared.storage.movies.existingClaim }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.shared.storage.movies.existingClaim }}
+          {{- else }}
           nfs:
             path: {{ .Values.shared.storage.movies.nfs.path }}
             server: {{ .Values.shared.storage.movies.nfs.server }}
+          {{- end }}
         - name: downloads
           persistentVolumeClaim:
             claimName: piratestack-downloads
@@ -91,9 +99,11 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.radarr.affinity }}
+      {{- if .Values.radarr.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.radarr.affinity | nindent 8 }}
+      {{- else }}
+      {{- include "piratestack.downloadsAffinity" . | nindent 6 }}
       {{- end }}
       {{- with .Values.radarr.tolerations }}
       tolerations:

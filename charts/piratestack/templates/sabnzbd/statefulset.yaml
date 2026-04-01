@@ -24,6 +24,9 @@ spec:
         {{- with .Values.sabnzbd.additionalLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        {{- if has "ReadWriteOnce" .Values.shared.storage.downloads.accessModes }}
+        piratestack/uses-downloads: "true"
+        {{- end }}
     spec:
       securityContext:
       {{- toYaml .Values.sabnzbd.securityContext.statefulSet | nindent 8 }}
@@ -98,9 +101,11 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.sabnzbd.affinity }}
+      {{- if .Values.sabnzbd.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.sabnzbd.affinity | nindent 8 }}
+      {{- else }}
+      {{- include "piratestack.downloadsAffinity" . | nindent 6 }}
       {{- end }}
       {{- with .Values.sabnzbd.tolerations }}
       tolerations:
