@@ -20,6 +20,7 @@ spec:
   template:
     metadata:
       labels:
+        {{- include "piratestack.labels" . | nindent 8 }}
         {{- include "radarr.selectorLabels" . | nindent 8 }}
         {{- with .Values.radarr.additionalLabels }}
         {{- toYaml . | nindent 8 }}
