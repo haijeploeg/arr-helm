@@ -10,7 +10,8 @@ metadata:
     {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-  accessModes: {{ .Values.shared.storage.downloads.accessModes }}
+  accessModes:
+    {{- toYaml .Values.shared.storage.downloads.accessModes | nindent 4 }}
   {{- if .Values.shared.storage.downloads.storageClassName }}
   storageClassName: {{ .Values.shared.storage.downloads.storageClassName }}
   {{- end }}

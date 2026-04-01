@@ -44,7 +44,7 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /health
+              path: /ping
               port: {{ .Values.bazarr.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
