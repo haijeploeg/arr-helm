@@ -41,6 +41,23 @@ app.kubernetes.io/app: maintainerr
 {{- end }}
 
 {{/*
+Automatic pod affinity for co-locating downloads-using pods on the same node when using RWO.
+Includes the affinity: key so the call site needs no extra if-check.
+*/}}
+{{- define "piratestack.downloadsAffinity" -}}
+{{- if has "ReadWriteOnce" .Values.shared.storage.downloads.accessModes }}
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchLabels:
+          piratestack/uses-downloads: "true"
+          app.kubernetes.io/instance: {{ .Release.Name }}
+      topologyKey: kubernetes.io/hostname
+{{- end }}
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "piratestack.labels" -}}

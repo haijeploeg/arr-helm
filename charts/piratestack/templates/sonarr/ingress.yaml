@@ -1,4 +1,4 @@
-{{- if .Values.sonarr.enable }}
+{{- if and .Values.sonarr.enable .Values.sonarr.ingress.enabled }}
 
 ---
 

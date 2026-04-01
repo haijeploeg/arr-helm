@@ -1,4 +1,4 @@
-{{- if .Values.tautulli.enable }}
+{{- if and .Values.tautulli.enable .Values.tautulli.ingress.enabled }}
 
 ---
 

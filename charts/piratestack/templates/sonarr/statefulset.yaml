@@ -24,6 +24,9 @@ spec:
         {{- with .Values.sonarr.additionalLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        {{- if has "ReadWriteOnce" .Values.shared.storage.downloads.accessModes }}
+        piratestack/uses-downloads: "true"
+        {{- end }}
     spec:
       securityContext:
       {{- toYaml .Values.sonarr.securityContext.statefulSet | nindent 8 }}
@@ -81,9 +84,14 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr-config
         - name: tv
+          {{- if .Values.shared.storage.tv.existingClaim }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.shared.storage.tv.existingClaim }}
+          {{- else }}
           nfs:
             path: {{ .Values.shared.storage.tv.nfs.path }}
             server: {{ .Values.shared.storage.tv.nfs.server }}
+          {{- end }}
         - name: downloads
           persistentVolumeClaim:
             claimName: piratestack-downloads
@@ -91,9 +99,11 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.sonarr.affinity }}
+      {{- if .Values.sonarr.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.sonarr.affinity | nindent 8 }}
+      {{- else }}
+      {{- include "piratestack.downloadsAffinity" . | nindent 6 }}
       {{- end }}
       {{- with .Values.sonarr.tolerations }}
       tolerations:

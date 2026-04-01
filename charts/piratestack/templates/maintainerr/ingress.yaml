@@ -1,4 +1,4 @@
-{{- if .Values.maintainerr.enable }}
+{{- if and .Values.maintainerr.enable .Values.maintainerr.ingress.enabled }}
 
 ---
 
