@@ -3,7 +3,7 @@
 apiVersion: v2
 description: Full arr based setup for homelab
 name: piratestack
-version: 2.2.0
+version: 2.3.0
 keywords:
   - sonarr
   - radarr
