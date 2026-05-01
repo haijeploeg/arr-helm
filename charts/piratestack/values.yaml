@@ -204,7 +204,7 @@ sabnzbd:
   enable: true
 
   image:
-    tag: 4.5.5
+    tag: 5.0.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/sabnzbd
 
