@@ -116,7 +116,7 @@ prowlarr:
   enable: true
 
   image:
-    tag: 2.3.5
+    tag: 2.4.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/prowlarr
 
@@ -160,7 +160,7 @@ radarr:
   enable: true
 
   image:
-    tag: 6.1.1
+    tag: 6.2.1
     pullPolicy: Always
     repository: lscr.io/linuxserver/radarr
 
