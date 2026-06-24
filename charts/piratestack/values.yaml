@@ -248,7 +248,7 @@ sonarr:
   enable: true
 
   image:
-    tag: 4.0.17
+    tag: 4.0.18
     pullPolicy: Always
     repository: lscr.io/linuxserver/sonarr
 
