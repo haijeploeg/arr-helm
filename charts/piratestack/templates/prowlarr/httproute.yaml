@@ -1,0 +1,34 @@
+{{- if and .Values.prowlarr.enable .Values.prowlarr.httpRoute.enabled }}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: prowlarr-httproute
+  {{- with .Values.prowlarr.httpRoute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "piratestack.labels" . | nindent 4 }}
+    {{- include "prowlarr.selectorLabels" . | nindent 4 }}
+    {{- with .Values.prowlarr.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  {{- with .Values.prowlarr.httpRoute.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prowlarr.httpRoute.hostnames }}
+  hostnames:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: prowlarr-service
+          port: {{ .Values.prowlarr.service.port }}
+{{- end }}

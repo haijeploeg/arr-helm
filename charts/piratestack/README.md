@@ -61,6 +61,10 @@ Every service supports the same set of options. Replace `<service>` with one of:
 | `<service>.ingress.ingressClassName` | `string` | `nginx` | Ingress class |
 | `<service>.ingress.annotations` | `dict` | `{}` | Ingress annotations |
 | `<service>.ingress.tls` | `list` | `[]` | TLS configuration |
+| `<service>.httpRoute.enabled` | `bool` | `false` | Whether to create an HTTPRoute resource |
+| `<service>.httpRoute.annotations` | `dict` | `{}` | HTTPRoute annotations |
+| `<service>.httpRoute.parentRefs` | `list` | `[]` | Gateway parent references |
+| `<service>.httpRoute.hostnames` | `list` | `[]` | HTTPRoute hostnames |
 | `<service>.storage.config.storage` | `string` | `5Gi` | Size of the config PVC |
 | `<service>.resources.requests.cpu` | `string` | `100m` | CPU request |
 | `<service>.resources.requests.memory` | `string` | `128Mi` | Memory request |
@@ -106,6 +110,13 @@ sonarr:
       - hosts:
           - sonarr.example.com
         secretName: sonarr-tls-secret
+  httpRoute:
+    enabled: true
+    parentRefs:
+      - name: public
+        namespace: gateway-system
+    hostnames:
+      - sonarr.example.com
 
 radarr:
   ingress:
