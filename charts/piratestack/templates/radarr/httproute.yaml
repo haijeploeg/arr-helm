@@ -28,6 +28,10 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      {{- with .Values.radarr.httpRoute.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       backendRefs:
         - name: radarr-service
           port: {{ .Values.radarr.service.port }}

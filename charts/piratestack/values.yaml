@@ -49,6 +49,7 @@ maintainerr:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:
@@ -104,6 +105,7 @@ bazarr:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:
@@ -154,6 +156,7 @@ prowlarr:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:
@@ -204,6 +207,7 @@ radarr:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:
@@ -254,6 +258,7 @@ sabnzbd:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:
@@ -304,6 +309,7 @@ sonarr:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:
@@ -351,6 +357,7 @@ tautulli:
     annotations: {}
     parentRefs: []
     hostnames: []
+    filters: []
 
   resources:
     requests:

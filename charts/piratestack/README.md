@@ -65,6 +65,7 @@ Every service supports the same set of options. Replace `<service>` with one of:
 | `<service>.httpRoute.annotations` | `dict` | `{}` | HTTPRoute annotations |
 | `<service>.httpRoute.parentRefs` | `list` | `[]` | Gateway parent references |
 | `<service>.httpRoute.hostnames` | `list` | `[]` | HTTPRoute hostnames |
+| `<service>.httpRoute.filters` | `list` | `[]` | HTTPRoute rule filters |
 | `<service>.storage.config.storage` | `string` | `5Gi` | Size of the config PVC |
 | `<service>.resources.requests.cpu` | `string` | `100m` | CPU request |
 | `<service>.resources.requests.memory` | `string` | `128Mi` | Memory request |
