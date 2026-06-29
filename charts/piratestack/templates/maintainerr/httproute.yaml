@@ -28,6 +28,10 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      {{- with .Values.maintainerr.httpRoute.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       backendRefs:
         - name: maintainerr-service
           port: {{ .Values.maintainerr.service.port }}

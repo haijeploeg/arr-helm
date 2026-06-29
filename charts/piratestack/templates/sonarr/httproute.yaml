@@ -28,6 +28,10 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      {{- with .Values.sonarr.httpRoute.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       backendRefs:
         - name: sonarr-service
           port: {{ .Values.sonarr.service.port }}

@@ -28,6 +28,10 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      {{- with .Values.prowlarr.httpRoute.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       backendRefs:
         - name: prowlarr-service
           port: {{ .Values.prowlarr.service.port }}
