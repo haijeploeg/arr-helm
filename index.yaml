@@ -64,6 +64,26 @@ entries:
     version: 1.0.0
   piratestack:
   - apiVersion: v2
+    created: "2026-08-07T17:53:33.802272087Z"
+    description: Full arr based setup for homelab
+    digest: b082343008e3e794f7e8bc1202a82898a97aa25ce190dbca186cc38b14819fa1
+    home: https://github.com/haijeploeg/arr-helm/tree/main/charts/piratestack
+    keywords:
+    - sonarr
+    - radarr
+    - tautulli
+    - prowlarr
+    - sabnzbd
+    - bazarr
+    - maintainerr
+    maintainers:
+    - email: ploeg.haije@gmail.com
+      name: haijeploeg
+    name: piratestack
+    urls:
+    - https://haijeploeg.github.io/arr-helm/piratestack-2.48.0.tgz
+    version: 2.48.0
+  - apiVersion: v2
     created: "2026-08-02T01:43:45.640694329Z"
     description: Full arr based setup for homelab
     digest: 881bc87a743bbae7a3a1250892f8070844a383a0698723a2756a0dd701606cf7
@@ -1742,4 +1762,4 @@ entries:
     urls:
     - https://haijeploeg.github.io/arr-helm/sonarr-1.0.0.tgz
     version: 1.0.0
-generated: "2026-08-02T01:43:45.637785968Z"
+generated: "2026-08-07T17:53:33.800648505Z"
