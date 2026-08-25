@@ -232,7 +232,7 @@ sabnzbd:
   enable: true
 
   image:
-    tag: 5.1.1
+    tag: 5.1.2
     pullPolicy: Always
     repository: lscr.io/linuxserver/sabnzbd
 
@@ -334,7 +334,7 @@ tautulli:
   enable: true
 
   image:
-    tag: 2.17.2
+    tag: 2.18.0
     pullPolicy: Always
     repository: lscr.io/linuxserver/tautulli
 
