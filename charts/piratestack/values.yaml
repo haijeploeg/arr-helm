@@ -334,7 +334,7 @@ tautulli:
   enable: true
 
   image:
-    tag: 2.18.0
+    tag: 2.18.1
     pullPolicy: Always
     repository: lscr.io/linuxserver/tautulli
 
