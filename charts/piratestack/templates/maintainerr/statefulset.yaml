@@ -46,12 +46,18 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.maintainerr.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: maintainerr
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: {{ .Values.maintainerr.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: maintainerr
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:

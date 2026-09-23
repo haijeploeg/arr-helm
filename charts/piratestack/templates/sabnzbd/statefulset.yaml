@@ -70,12 +70,18 @@ spec:
             httpGet:
               path: /api?mode=version
               port: {{ .Values.sabnzbd.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: sabnzbd
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /api?mode=version
               port: {{ .Values.sabnzbd.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: sabnzbd
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:

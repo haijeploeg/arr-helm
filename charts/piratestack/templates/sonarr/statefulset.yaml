@@ -57,12 +57,18 @@ spec:
             httpGet:
               path: /ping
               port: {{ .Values.sonarr.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: sonarr
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /ping
               port: {{ .Values.sonarr.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: sonarr
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:

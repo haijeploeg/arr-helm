@@ -53,12 +53,18 @@ spec:
             httpGet:
               path: /ping
               port: {{ .Values.prowlarr.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: prowlarr
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /ping
               port: {{ .Values.prowlarr.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: prowlarr
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:

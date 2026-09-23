@@ -2,6 +2,10 @@
 
 ## piratestack
 
+### 2.64.0
+
+- **New: Host header on liveness/readiness probes** — Sonarr, Radarr, Bazarr, Prowlarr, Sabnzbd, Maintainerr and Tautulli probes now send a `Host` header matching the app's name (e.g. `sonarr`, `bazarr`), so ingress/proxy setups that route on the Host header don't reject probe traffic.
+
 ### 2.0.1
 
 - **Fix: Pod affinity not working with RWO downloads** — Pods were missing the `app.kubernetes.io/instance` label in their pod template, causing the auto-injected `podAffinity` rule to never match any node. Sonarr, Radarr and Sabnzbd pod templates now include the standard Helm instance label so co-location works correctly.

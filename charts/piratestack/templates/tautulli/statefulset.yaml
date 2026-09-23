@@ -46,12 +46,18 @@ spec:
             httpGet:
               path: /status
               port: {{ .Values.tautulli.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: tautulli
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /status
               port: {{ .Values.tautulli.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: tautulli
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:
