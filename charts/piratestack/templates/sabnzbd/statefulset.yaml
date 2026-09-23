@@ -72,7 +72,7 @@ spec:
               port: {{ .Values.sabnzbd.service.port }}
               httpHeaders:
                 - name: Host
-                  value: sabnzbd
+                  value: sabnzbd-0
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
@@ -81,7 +81,7 @@ spec:
               port: {{ .Values.sabnzbd.service.port }}
               httpHeaders:
                 - name: Host
-                  value: sabnzbd
+                  value: sabnzbd-0
             initialDelaySeconds: 30
             periodSeconds: 10
           resources:

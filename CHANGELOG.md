@@ -2,6 +2,10 @@
 
 ## piratestack
 
+### 2.64.1
+
+- **Fix: Sabnzbd probe Host header** — Sabnzbd rejects the app-name Host header used by the other services; its liveness/readiness probes now send its StatefulSet pod name (`sabnzbd-0`) instead.
+
 ### 2.64.0
 
 - **New: Host header on liveness/readiness probes** — Sonarr, Radarr, Bazarr, Prowlarr, Sabnzbd, Maintainerr and Tautulli probes now send a `Host` header matching the app's name (e.g. `sonarr`, `bazarr`), so ingress/proxy setups that route on the Host header don't reject probe traffic.
